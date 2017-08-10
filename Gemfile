@@ -5,6 +5,6 @@ gem 'evostream-event', path: '/Users/jeremy/Projects/Gems/evostream-event'
 
 group :development do
   gem 'rake', '~> 12.0'
-  gem 'rubocop'
   gem 'reek'
+  gem 'rubocop'
 end

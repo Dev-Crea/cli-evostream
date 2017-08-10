@@ -13,7 +13,6 @@ Evostream::Service.configuration do |config|
   # - production    : Send request to EvoStream
   config.environment  = :production
 
-
   config.web_root = ''
   config.name = ''
   config.model = ''

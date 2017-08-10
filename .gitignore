@@ -1,0 +1,5 @@
+# Package auto generated
+*.tar.gz
+
+# Temporary gem
+packaging/vendor

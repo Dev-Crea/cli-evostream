@@ -8,7 +8,7 @@ require './lib/app/command'
 require './lib/app/argument'
 
 # Load configuration
-load 'evostream_cli.rb'
+load './lib/app/evostream_cli.rb'
 
 # Prepare command
 Command.read_command

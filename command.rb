@@ -36,7 +36,7 @@ module Command
 
   def self.display_help
     puts "CLI For EvoStream -- #{Evostream::GEM_NAME} [#{Evostream::VERSION}]"
-    File.open('help', 'r') do |f|
+    File.open('./lib/app/help', 'r') do |f|
       f.each_line do |line|
         puts line
       end

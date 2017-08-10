@@ -61,7 +61,8 @@ file "packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-osx.tar.gz" do
 end
 
 def create_package(target)
-  @package_dir = "#{PACKAGE_NAME}-#{VERSION}-#{target}"
+  @target = target
+  @package_dir = "#{PACKAGE_NAME}-#{VERSION}-#{@target}"
   prepare_folder
   uncompress_traveling_ruby
   add_files
@@ -71,17 +72,17 @@ def prepare_folder
   sh "rm -rf #{@package_dir}"
   sh "mkdir -p #{@package_dir}/lib/app"
   sh "mkdir #{@package_dir}/lib/ruby"
-  sh "mkdir #{@package_dir}/lib/vendor/.bundle"
 end
 
 def add_files
-  %w[cli argument command evostream_cli help].each do |file|
-    sh "cp #{file}.rb #{@package_dir}/lib/app"
+  %w[cli.rb argument.rb command.rb evostream_cli.rb help].each do |file|
+    sh "cp #{file} #{@package_dir}/lib/app"
   end
 
   sh "cp packaging/wrapper.sh #{@package_dir}/cli"
   sh "cp -pR packaging/vendor #{@package_dir}/lib/"
   sh "cp Gemfile Gemfile.lock #{@package_dir}/lib/vendor/"
+  sh "mkdir #{@package_dir}/lib/vendor/.bundle"
   sh "cp packaging/bundler-config #{@package_dir}/lib/vendor/.bundle/config"
 
   sh "cp packaging/wrapper.sh #{@package_dir}/cli"
@@ -94,11 +95,11 @@ def dir_only
 end
 
 def uncompress_traveling_ruby
-  sh "tar -xzf packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-#{target}" \
+  sh "tar -xzf packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-#{@target}" \
     ".tar.gz -C #{@package_dir}/lib/ruby"
 end
 
 def download_runtime(target)
   sh 'cd packaging && curl -L -O --fail https://d6r77u77i8pq3.cloudfront.net/' \
-    "releases/traveling-ruby-#{TRAVELING_RUBY_VERSION}-#{target}.tar.gz"
+    "releases/traveling-ruby-#{TRAVELING_RUBY_VERSION}-#{@target}.tar.gz"
 end

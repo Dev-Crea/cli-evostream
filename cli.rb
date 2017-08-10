@@ -4,8 +4,8 @@
 require 'active_support/all'
 require 'evostream/event'
 require 'yaml'
-require './command'
-require './argument'
+require './lib/app/command'
+require './lib/app/argument'
 
 # Load configuration
 load 'evostream_cli.rb'
